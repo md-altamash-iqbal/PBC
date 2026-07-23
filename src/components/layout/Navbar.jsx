@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "../../assets/Logo.png";
@@ -6,11 +7,11 @@ const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "About Us", href: "#" },
-    { name: "Projects", href: "#" },
-    { name: "Gallery", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Home", path: "/" },
+    { name: "About Us", path: "/about" },
+    { name: "Projects", path: "/projects" },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -41,12 +42,18 @@ const Navbar = () => {
           <ul className="hidden lg:flex items-center gap-10 font-medium text-[15px]">
             {navLinks.map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.href}
-                  className="hover:text-[#F4B400] transition duration-300"
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `transition duration-300 ${
+                      isActive
+                        ? "text-[#F4B400] font-semibold"
+                        : "hover:text-[#F4B400]"
+                    }`
+                  }
                 >
                   {item.name}
-                </a>
+                </NavLink>
               </li>
             ))}
 
@@ -114,9 +121,16 @@ const Navbar = () => {
         <div className="lg:hidden bg-white shadow-lg">
           <div className="flex flex-col px-6 py-5 gap-5">
             {navLinks.map((item) => (
-              <a key={item.name} href="#">
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={() => setMobileMenu(false)}
+                className={({ isActive }) =>
+                  isActive ? "text-[#F4B400] font-semibold" : ""
+                }
+              >
                 {item.name}
-              </a>
+              </NavLink>
             ))}
 
             <button className="bg-[#F4B400] py-3 rounded-md font-semibold">

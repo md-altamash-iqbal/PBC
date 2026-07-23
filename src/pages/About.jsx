@@ -1,8 +1,12 @@
+import AboutHero from "../components/about/AboutHero";
+import CompanyStory from "../components/about/CompanyStory";
+
 const About = () => {
   return (
-    <div>
-      <h1>About Us</h1>
-    </div>
+    <main className="min-h-screen">
+      <AboutHero />
+      <CompanyStory />
+    </main>
   );
 };
 
